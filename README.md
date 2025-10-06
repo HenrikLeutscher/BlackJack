@@ -20,11 +20,18 @@ HTML, Bootstrap and JavaScript
 - See what the dealers result is if you decide to stand. A random number is generated for this result. Resulting in a win if you are lucky and a loss if the dealer pulls more than you but less than 21.
 
 # Future Plans:
-- UI Upgrade
-- Actually SHOW the cards you are getting
-- Feature for ACE, to decide if its a 1 or 11.
-- Hourly balance refills
-- Scoreboard
+[] UI Upgrade
+[] Object instead of 10s of variables.
+[] Helper Functions
+[] CONST for magic numbers
+[] Disabled Start Game Button if a game is in progress
+[] Feature for ACE, to decide if its a 1 or 11.
+[] Hourly balance refills
+[] Scoreboard
+[] Save the state of the game, so it loads exact same
+[] Animation when you Win
+[] Remove reset balance once refill and saving is done.
+++++ More will be added
 
 # Getting Started:
 
