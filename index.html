@@ -14,12 +14,13 @@
     </div>
     <div class="text-center">
         <p class="mt-4" id="blackjackMessage">Press start game to play</p>
+        <p id="dealerSum"></p>
         <p id="cards">Your Cards:</p>
         <p id="sum">Total:</p>
     </div>
     <div class="d-flex flex-row justify-content-center mt-2 gap-2">
         <button class="btn btn-secondary" onclick="drawNewCard()">Hit</button>
-        <button class="btn btn-secondary">Stand</button>
+        <button class="btn btn-secondary" onclick="stand()">Stand</button>
     </div>
     <div class="d-flex flex-column justify-content-center mt-2 gap-2">
         <button class="btn btn-danger text-center" onclick="resetBalance()">Reset Your Balance</button>

@@ -19,6 +19,8 @@ const alertMessage = document.getElementById("alertMessage");
 
 const balanceElement = document.getElementById("balance");
 
+const dealerSum = document.getElementById("dealerSum");
+
 function startGame() {
   if (gameHasStarted === false && balance > 0) {
     gameHasStarted = true;
@@ -55,7 +57,7 @@ function blackJackStatus() {
     blackjackMessage.textContent = "Wohoo! You've got Blackjack!";
     hasBlackJack = true;
     gameHasStarted = false;
-    balance += 500;
+    balance += 150;
   } else if (sum < 21) {
     blackjackMessage.textContent = "Do you want to draw a new card?";
   } else {
@@ -84,6 +86,30 @@ function drawNewCard() {
       alertMessage.classList.add("d-none");
     }, 5000);
   }
+}
+
+function stand() {
+    gameHasStarted = false;
+
+    let dealerCards = Math.floor( Math.random() * 11) + 16;
+    dealerSum.textContent = "Dealer's total: " + dealerCards;
+
+    if (sum > 21) {
+        return; // Player already lost
+    } else if (dealerCards > 21 || sum > dealerCards) {
+        blackjackMessage.textContent = "You win!";
+        balance += 150;
+        balanceElement.textContent = "Your Balance: $" + balance;
+        localStorage.setItem("balance", balance);
+    } else if (sum === dealerCards) {
+        blackjackMessage.textContent = "It's a tie!";
+        // Dont change the balance
+    } else {
+        blackjackMessage.textContent = "You lose!";
+        balance -= 20;
+        balanceElement.textContent = "Your Balance: $" + balance;
+        localStorage.setItem("balance", balance);
+    }
 }
 
 function resetBalance() {
