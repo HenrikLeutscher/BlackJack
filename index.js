@@ -3,6 +3,11 @@ let secondCard = 0;
 let sum = 0;
 let hasBlackJack = false;
 let gameHasStarted = false;
+let balance = 150;
+
+// Maybe add a refill Balance instead of reset button
+// const REFILL_AMOUNT = 150;
+// const REFILL_INTERVAL = ;
 
 const blackjackMessage = document.getElementById("blackjackMessage");
 
@@ -14,13 +19,15 @@ const alertMessage = document.getElementById("alertMessage");
 
 const balanceElement = document.getElementById("balance");
 
-let balance = 100;
-
 function startGame() {
-  if (gameHasStarted === false) {
+  if (gameHasStarted === false && balance > 0) {
     gameHasStarted = true;
     console.log("Game Started");
-    balanceElement.textContent = "Your Balance: $100";
+
+    if (localStorage.getItem("balance")) {
+      balance = parseInt(localStorage.getItem("balance"));
+    }
+    balanceElement.textContent = "Your Balance: $" + balance;
 
     firstCard = Math.floor(Math.random() * 11) + 1;
     secondCard = Math.floor(Math.random() * 11) + 1;
@@ -29,6 +36,10 @@ function startGame() {
     sumElement.textContent = "Total: " + sum;
     cardsElement.textContent = "Your Cards: " + firstCard + ", " + secondCard;
     blackJackStatus();
+  } else if (balance <= 0) {
+    alertMessage.textContent =
+      "You have run out of balance. Please reset the game.";
+    alertMessage.classList.remove("d-none");
   } else {
     alertMessage.textContent =
       "Game is already running. Please finish the current game to start a new one.";
@@ -43,15 +54,19 @@ function blackJackStatus() {
   if (sum === 21) {
     blackjackMessage.textContent = "Wohoo! You've got Blackjack!";
     hasBlackJack = true;
-    blackjackBalance();
+    gameHasStarted = false;
+    balance += 500;
   } else if (sum < 21) {
     blackjackMessage.textContent = "Do you want to draw a new card?";
   } else {
     blackjackMessage.textContent = "You are out of the game!";
     gameHasStarted = false;
     hasBlackJack = false;
-    blackjackBalance();
+    balance -= 20;
   }
+
+  balanceElement.textContent = "Your Balance: $" + balance;
+  localStorage.setItem("balance", balance);
 }
 
 function drawNewCard() {
@@ -71,13 +86,8 @@ function drawNewCard() {
   }
 }
 
-function blackjackBalance() {
-
-    if (hasBlackJack === true) {
-        balance += 50;
-        balanceElement.textContent = "Your Balance: $" + balance;
-    } else {
-        balance -= 25;
-        balanceElement.textContent = "Your Balance: $" + balance;
-    }
+function resetBalance() {
+    balance = 150;
+    localStorage.setItem("balance", balance);
+    balanceElement.textContent = "Your Balance: $" + balance;
 }
