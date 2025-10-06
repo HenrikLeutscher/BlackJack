@@ -10,15 +10,10 @@ let balance = 150;
 // const REFILL_INTERVAL = ;
 
 const blackjackMessage = document.getElementById("blackjackMessage");
-
 const sumElement = document.getElementById("sum");
-
 const cardsElement = document.getElementById("cards");
-
 const alertMessage = document.getElementById("alertMessage");
-
 const balanceElement = document.getElementById("balance");
-
 const dealerSum = document.getElementById("dealerSum");
 
 function startGame() {
